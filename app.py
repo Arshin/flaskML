@@ -22,13 +22,12 @@ def predict():
     prediction = model.predict([final])
     return render_template('home.html', pred='Expected prediction will be {}'.format(prediction))
 
-# @app.route('/predict_api',methods=['POST'])
-# def predict_api():
-#     data = request.get_json(force=True)
-#     data_unseen = pd.DataFrame([data])
-#     prediction = predict_model(model, data=data_unseen)
-#     output = prediction.Label[0]
-#     return jsonify(output)
+@app.route('/predict_api',methods=['POST'])
+def predict_api():
+    data = request.get_json(force=True)
+    # data_unseen = pd.DataFrame([data])
+    prediction = model.predict([data])
+    return jsonify(prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)
